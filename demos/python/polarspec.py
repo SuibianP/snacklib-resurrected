@@ -1,6 +1,11 @@
 #! /usr/bin/env python
 
-from Tkinter import *
+import sys
+if sys.version_info[0] == 2:
+    from Tkinter import *
+else:
+    from tkinter import *
+
 from tkSnack import *
 from math import *
 

@@ -5,8 +5,13 @@
 # Note: this script will also play audio files in any other format supported
 # by tkSnack
 
+from __future__ import print_function
 import sys
-from Tkinter import *
+if sys.version_info[0] == 2:
+    from Tkinter import *
+else:
+    from tkinter import *
+
 from tkSnack import *
 
 initializeSnack(Tkinter.Tk())
@@ -19,4 +24,4 @@ if sys.argv[1:]:
 	snd = Sound(file=sys.argv[1])
 	snd.play(blocking=1)
 else:
-	print "Usage: oggplay.py file.ogg"
+	print("Usage: oggplay.py file.ogg")

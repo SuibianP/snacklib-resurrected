@@ -112,7 +112,7 @@ clean:
 install:
 	@if test ! -d "$(SNACK_INSTALL_DIR)" ; then \
 	    echo "mkdir $(SNACK_INSTALL_DIR)" ; \
-	    mkdir "$(SNACK_INSTALL_DIR)" ; \
+	    mkdir -p "$(SNACK_INSTALL_DIR)" ; \
 	fi
 	cp $(SNACK_STUB) "$(SNACK_INSTALL_DIR)"
 	cp $(SNACK_DLL) "$(SNACK_INSTALL_DIR)"

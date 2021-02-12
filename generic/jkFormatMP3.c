@@ -29,6 +29,7 @@ must retain this copyright notice.
 #include "snack.h"
 #include "jkFormatMP3.h"
 #include <string.h>
+#include <math.h>
 #define FRAS2(is,a) ((is) > 0 ? t_43[(is)]*(a):-t_43[-(is)]*(a))
 #define MAXFRAMESIZE 2106  /* frame size starting at header */
 #define roundf(x) (floor((x)+(float )0.5f))
@@ -1308,8 +1309,6 @@ huffman_decode(int tbl,int *x,int *y)
   *y=*h_tab&0xf;
   return len;
 }
-
-#include <math.h>
 
 #define PI12      0.261799387f
 #define PI36      0.087266462f

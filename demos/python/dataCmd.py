@@ -1,7 +1,12 @@
 #! /usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
-import Tkinter
+import sys
+if sys.version_info[0] == 2:
+    import Tkinter
+else:
+    import tkinter as Tkinter
+
 import tkSnack
 
 root = Tkinter.Tk()

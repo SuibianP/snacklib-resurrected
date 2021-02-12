@@ -1,6 +1,12 @@
 #! /usr/bin/env python
 
-from Tkinter import *
+from __future__ import print_function
+import sys
+if sys.version_info[0] == 2:
+    from Tkinter import *
+else:
+    from tkinter import *
+
 from tkSnack import *
 
 root = Tkinter.Tk()
@@ -15,11 +21,11 @@ snd = Sound()
 
 file = 'test.sph'
 
-print 'reading sphere file \'%s\'' % file
+print('reading sphere file \'%s\'' % file)
 snd.read(file)
 
-print 'playing file \'%s\'' % file
+print('playing file \'%s\'' % file)
 snd.play(blocking=1)
 
-print 'writing wav file \'%s\'' % file
+print('writing wav file \'%s\'' % file)
 snd.write('new.wav')

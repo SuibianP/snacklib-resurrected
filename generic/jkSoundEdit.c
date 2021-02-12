@@ -291,6 +291,12 @@ lengthCmd(Sound *s, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
       string = Tcl_GetStringFromObj(objv[arg], &len);
       
       if (strncmp(string, "-units", len) == 0) {
+	if (arg + 1 == objc) {
+	  Tcl_AppendResult(interp, "No argument given for ",
+			   string, " option", (char *) NULL);
+	  return TCL_ERROR;
+	}
+
 	string = Tcl_GetStringFromObj(objv[arg+1], &len);
 	if (strncasecmp(string, "seconds", len) == 0) type = 1;
 	if (strncasecmp(string, "samples", len) == 0) type = 0;
@@ -1149,6 +1155,12 @@ convertCmd(Sound *s, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
 
     if (Tcl_GetIndexFromObj(interp, objv[arg], subOptionStrings,
 			    "option", 0, &index) != TCL_OK) {
+      return TCL_ERROR;
+    }
+
+    if (arg + 1 == objc) {
+      Tcl_AppendResult(interp, "No argument given for ",
+		       subOptionStrings[index], " option", (char *) NULL);
       return TCL_ERROR;
     }
 

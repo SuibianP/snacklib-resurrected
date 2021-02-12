@@ -7,8 +7,14 @@ by Kevin Russell and Kare Sjolander
 last modified: Mar 28, 2003
 """
 
-import Tkinter
-import types
+from __future__ import print_function
+
+import sys
+if sys.version_info[0] == 2:
+    import Tkinter
+else:
+    import tkinter as Tkinter
+
 import string
 
 Tkroot = None
@@ -20,7 +26,8 @@ def initializeSnack(newroot):
     Tkroot = newroot
     Tkroot.tk.call('eval', 'package require snack')
     Tkroot.tk.call('snack::createIcons')
-    Tkroot.tk.call('snack::setUseOldObjAPI')
+    if sys.version_info[0] == 2:
+        Tkroot.tk.call('snack::setUseOldObjAPI')
     audio = AudioControllerSingleton()
     mixer = MixerControllerSingleton()
 
@@ -92,7 +99,7 @@ class TkObject:
                 self.tk.call(self.name, 'configure')):
                 cnf[x[0][1:]] = (x[0][1:],) + x[1:]
                 return cnf
-        if type(cnf) is types.StringType:
+        if isinstance(cnf, str):
             x = self.tk.split(self.tk.call(self.name, 'configure', '-'+cnf))
             return (x[0][1:],) + x[1:]
         self.tk.call((self.name, 'configure') + self._options(cnf))
@@ -124,8 +131,7 @@ class Sound (TkObject):
             if Tkroot:
                 master = Tkroot
             else:
-                raise RuntimeError, \
-                      'Tk not intialized or not registered with Snack'
+                raise RuntimeError('Tk not intialized or not registered with Snack')
         self.tk = master.tk
         if not name:
             self.name = self.tk.call(('sound',) + self._options(kw))
@@ -409,8 +415,7 @@ class Filter(TkObject):
         if Tkroot:
             master = Tkroot
         else:
-            raise RuntimeError, \
-                 'Tk not intialized or not registered with Snack'
+            raise RuntimeError('Tk not intialized or not registered with Snack')
         self.tk = master.tk
         self.name = self.tk.call(('snack::filter', name) + args +
                                  self._options(kw))
@@ -537,7 +542,7 @@ class SoundFrame(Tkinter.Frame):
         self.sound.record()
         
     def info(self):
-        print self.sound.info()
+        print(self.sound.info())
         
 def createSpectrogram(canvas, *args, **kw):
     """Draws a spectrogram of a sound on canvas."""
