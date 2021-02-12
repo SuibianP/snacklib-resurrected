@@ -1,0 +1,12 @@
+*.o
+*.a
+*.so
+*.obj
+*.dll
+*.lib
+*.dylib
+Makefile
+config.log
+config.status
+snackConfig.sh
+
